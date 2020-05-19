@@ -224,6 +224,7 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	replaced := strings.Replace(string(fileData), "XXX_PAGE_TITLE_XXX",
 		story, -1)
+	replaced = strings.Replace(replaced, "XXX_GA_ID_XXX", os.Getenv("GA_ID"), -1)
 	w.Header().Set("Content-Type", "text/html")
 	w.Write([]byte(replaced))
 }
@@ -294,6 +295,7 @@ func StartChapter(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	replaced = strings.Replace(replaced, "XXX_TITLE_XXX", title, -1)
 	replaced = strings.Replace(replaced, "XXX_DESCRIPTION_XXX",
 		description, -1)
+	replaced = strings.Replace(replaced, "XXX_GA_ID_XXX", os.Getenv("GA_ID"), -1)
 	w.Header().Set("Content-Type", "text/html")
 	w.Write([]byte(replaced))
 }
