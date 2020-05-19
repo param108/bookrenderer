@@ -233,6 +233,7 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func main() {
+	port := os.Getenv("PORT")
 	parseChapters()
 	router := httprouter.New()
 	router.GET("/read/:name/", Start)
@@ -241,5 +242,5 @@ func main() {
 	router.GET("/static/*path", Static)
 	router.GET("/service-worker.js", StaticPath)
 	router.GET("/index.html", StaticPath)
-	log.Fatal(http.ListenAndServe(":5050", router))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
